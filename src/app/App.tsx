@@ -153,8 +153,8 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
           >
             <div
               style={{
-                width: 36,
-                height: 36,
+                width: 48,
+                height: 48,
                 background: "transparent",
                 display: "flex",
                 alignItems: "center",
@@ -172,7 +172,8 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
                   height: "100%",
                   objectFit: "contain",
                   background: "transparent",
-                  filter: "none",
+                  filter: scrolled ? "invert(1) brightness(1.2)" : "none",
+                  transition: "filter 0.3s ease",
                 }}
               />
             </div>
