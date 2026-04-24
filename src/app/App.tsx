@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, ReactNode } from "react";
 import "../styles/fonts.css";
 import "../styles/mrfone.css";
+import LogoImg from "../assets/Logo.png";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Constants
@@ -158,19 +159,20 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                overflow: "hidden",
+                borderRadius: 6,
               }}
             >
-              <span
+              <img
+                src={LogoImg}
+                alt="MrFone logo"
                 style={{
-                  color: scrolled ? "#ffffff" : "#0a0a0a",
-                  fontSize: 12,
-                  fontWeight: 800,
-                  fontFamily: "'Inter', sans-serif",
-                  letterSpacing: "-0.02em",
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  filter: scrolled ? "invert(1) brightness(2) saturate(0)" : "none",
                 }}
-              >
-                MF
-              </span>
+              />
             </div>
             <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
               <span
