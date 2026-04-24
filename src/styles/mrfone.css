@@ -1,0 +1,299 @@
+/* MrFone — Premium Animations & Base Overrides */
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image clip-reveal: bottom-to-top wipe */
+.img-wrapper {
+  overflow: hidden;
+}
+.img-wrapper img {
+  transform: scale(1.08);
+  transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 1s cubic-bezier(0.16, 1, 0.3, 1);
+  clip-path: inset(0 0 100% 0);
+}
+.img-wrapper.active img {
+  transform: scale(1);
+  clip-path: inset(0 0 0% 0);
+}
+
+/* Hover zoom for grid images */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.05);
+}
+
+/* Button hover */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #0a0a0a;
+  color: #ffffff;
+  border: 1px solid #0a0a0a;
+  padding: 13px 28px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+.btn-primary:hover {
+  background: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 13px 28px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #0a0a0a;
+  border: 1px solid #0a0a0a;
+  padding: 13px 28px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+.btn-outline-dark:hover {
+  background: #0a0a0a;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Trust block hover */
+.trust-block {
+  border: 1px solid #e4e4e7;
+  padding: 36px 32px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.trust-block:hover {
+  border-color: #0a0a0a;
+}
+
+/* Testimonial card */
+.testi-card {
+  border: 1px solid #e4e4e7;
+  padding: 32px;
+  transition: border-color 0.25s ease;
+}
+.testi-card:hover {
+  border-color: #a1a1aa;
+}
+
+/* Service block */
+.service-block {
+  border: 1px solid #e4e4e7;
+  padding: 40px 32px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.service-block:hover {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+}
+.service-block:hover .service-icon,
+.service-block:hover .service-title,
+.service-block:hover .service-desc {
+  color: #ffffff;
+}
+
+/* Header scroll */
+.header-scrolled {
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #e4e4e7;
+}
+
+/* Section label */
+.section-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #71717a;
+}
+
+/* Thick horizontal rule */
+.rule-thick {
+  width: 40px;
+  height: 2px;
+  background: #0a0a0a;
+  margin-bottom: 24px;
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+  .mobile-nav {
+    position: fixed;
+    inset: 0;
+    background: #0a0a0a;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+}
+
+/* ─── Responsive Grids ─────────────────────────────────────── */
+
+/* Store grid — 12-col desktop, stacked mobile */
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 300px 300px;
+  gap: 3px;
+}
+.store-grid .sg-main  { grid-column: span 7; grid-row: span 2; }
+.store-grid .sg-tr    { grid-column: span 5; grid-row: span 1; }
+.store-grid .sg-bl    { grid-column: span 3; grid-row: span 1; }
+.store-grid .sg-br    { grid-column: span 2; grid-row: span 1; }
+
+@media (max-width: 767px) {
+  .store-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 220px 220px;
+    gap: 2px;
+  }
+  .store-grid .sg-main { grid-column: span 2; grid-row: span 1; }
+  .store-grid .sg-tr   { grid-column: span 2; grid-row: span 1; }
+  .store-grid .sg-bl   { grid-column: span 1; grid-row: span 1; }
+  .store-grid .sg-br   { grid-column: span 1; grid-row: span 1; }
+}
+
+/* Customers grid */
+.customers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+@media (max-width: 639px) {
+  .customers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Trust grid */
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #e4e4e7;
+}
+@media (max-width: 767px) {
+  .trust-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Services grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: #27272a;
+}
+@media (max-width: 767px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Testimonials grid */
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+}
+@media (max-width: 767px) {
+  .testi-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* About split */
+.about-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  align-items: stretch;
+}
+@media (max-width: 767px) {
+  .about-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Contact split */
+.contact-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+}
+@media (max-width: 767px) {
+  .contact-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* About stats mini grid */
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #1a1a1a;
+  margin-bottom: 36px;
+}
