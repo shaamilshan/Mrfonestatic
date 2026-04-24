@@ -155,12 +155,14 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
               style={{
                 width: 36,
                 height: 36,
-                background: scrolled ? "#0a0a0a" : "#ffffff",
+                background: "#ffffff",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 overflow: "hidden",
-                borderRadius: 6,
+                borderRadius: 9,
+                boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+                padding: 4,
               }}
             >
               <img
@@ -170,7 +172,7 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
                   width: "100%",
                   height: "100%",
                   objectFit: "contain",
-                  filter: scrolled ? "invert(1) brightness(2) saturate(0)" : "none",
+                  filter: "none",
                 }}
               />
             </div>
