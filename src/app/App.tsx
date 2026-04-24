@@ -75,6 +75,34 @@ function RevealUp({
   );
 }
 
+function Preloader() {
+  const [shouldRender, setShouldRender] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldRender(false);
+    }, 3200); // 2.4s animation + 0.8s exit
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!shouldRender) return null;
+
+  return (
+    <div className="preloader">
+      <div className="preloader-content">
+        <div className="preloader-logo">
+          <img src={LogoImg} alt="MrFone" />
+        </div>
+        <div className="preloader-bar">
+          <div className="preloader-bar-fill" />
+        </div>
+        <div className="preloader-text">MrFone</div>
+      </div>
+    </div>
+  );
+}
+
 function RevealImg({
   src,
   alt,
@@ -462,7 +490,7 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
         }}
       >
         {/* Eyebrow */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }} className="hero-content">
           <div style={{ width: 32, height: 1, background: "rgba(255,255,255,0.4)" }} />
           <span
             style={{
@@ -490,10 +518,13 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
             maxWidth: 800,
             marginBottom: 24,
           }}
+          className="hero-headline"
         >
-          Koduvally's Trusted
+          <span style={{ animationDelay: "0ms" }}>Koduvally's</span>
+          {" "}
+          <span style={{ animationDelay: "80ms" }}>Trusted</span>
           <br />
-          <span style={{ color: "rgba(255,255,255,0.55)" }}>Smartphone Store.</span>
+          <span style={{ color: "rgba(255,255,255,0.55)", animationDelay: "160ms" }}>Smartphone Store.</span>
         </h1>
 
         {/* Sub */}
@@ -507,13 +538,14 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
             marginBottom: 44,
             fontWeight: 400,
           }}
+          className="hero-description"
         >
           Premium & budget smartphones with complete transparency.
           Every device verified. Every deal trusted.
         </p>
 
         {/* CTAs */}
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }} className="hero-cta">
           <a href="https://maps.app.goo.gl/m1TongMLL4ETGBTi6" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ background: "#ffffff", color: "#0a0a0a", borderColor: "#ffffff", textDecoration: "none" }}>
             <svg viewBox="0 0 20 20" fill="currentColor" style={{ width: 14, height: 14 }}>
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -538,6 +570,7 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
             borderTop: "1px solid rgba(255,255,255,0.1)",
             flexWrap: "wrap",
           }}
+          className="hero-stats"
         >
           {[
             { n: "50000+", l: "Devices Sold" },
@@ -561,13 +594,9 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
                     color: "#ffffff",
                     letterSpacing: "-0.02em",
                     marginBottom: 2,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 0,
                   }}
                 >
-                  <span style={{ minWidth: "1.2em" }}>4</span>
-                  <span>.9★</span>
+                  4.9★
                 </div>
               )}
               <p
@@ -1938,6 +1967,7 @@ export default function App() {
 
   return (
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#ffffff", overflowX: "hidden" }}>
+      <Preloader />
       <Header onNav={scrollTo} />
       <Hero onNav={scrollTo} />
       <StoreGrid />
