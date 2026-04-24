@@ -172,7 +172,7 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
                   height: "100%",
                   objectFit: "contain",
                   background: "transparent",
-                  filter: scrolled ? "invert(1) brightness(1.2)" : "none",
+                  filter: scrolled ? "none" : "invert(1) brightness(1.2)",
                   transition: "filter 0.3s ease",
                 }}
               />
