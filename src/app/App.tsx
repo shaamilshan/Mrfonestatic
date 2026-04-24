@@ -145,7 +145,7 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 10,
+              gap: 8,
               background: "none",
               border: "none",
               cursor: "pointer",
@@ -153,8 +153,8 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
           >
             <div
               style={{
-                width: 30,
-                height: 30,
+                width: 36,
+                height: 36,
                 background: scrolled ? "#0a0a0a" : "#ffffff",
                 display: "flex",
                 alignItems: "center",
@@ -169,35 +169,10 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
                 style={{
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
+                  objectFit: "contain",
                   filter: scrolled ? "invert(1) brightness(2) saturate(0)" : "none",
                 }}
               />
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-              <span
-                style={{
-                  fontSize: 13,
-                  fontWeight: 700,
-                  fontFamily: "'Inter', sans-serif",
-                  color: scrolled ? "#0a0a0a" : "#ffffff",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                MrFone
-              </span>
-              <span
-                style={{
-                  fontSize: 9,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: scrolled ? "#71717a" : "rgba(255,255,255,0.5)",
-                  fontFamily: "'Inter', sans-serif",
-                  fontWeight: 500,
-                }}
-              >
-                Think Digital
-              </span>
             </div>
           </button>
 
