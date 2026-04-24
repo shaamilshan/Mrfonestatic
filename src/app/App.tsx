@@ -100,6 +100,60 @@ function RevealImg({
   );
 }
 
+function CountUp({
+  end,
+  suffix = "",
+  duration = 2400,
+  delay = 0,
+}: {
+  end: number;
+  suffix?: string;
+  duration?: number;
+  delay?: number;
+}) {
+  const [count, setCount] = useState(0);
+  const { ref, active } = useReveal();
+
+  useEffect(() => {
+    if (!active) return;
+    
+    let startTime: number;
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      setCount(Math.floor(end * progress));
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      requestAnimationFrame(animate);
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [active, end, duration, delay]);
+
+  return (
+    <div
+      ref={ref}
+      className="count-up"
+      style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: 22,
+        fontWeight: 700,
+        color: "#ffffff",
+        letterSpacing: "-0.02em",
+        marginBottom: 2,
+      }}
+    >
+      {count}{suffix}
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Header
 // ─────────────────────────────────────────────────────────────────────────────
@@ -127,9 +181,11 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
           scrolled ? "header-scrolled" : "bg-transparent"
         }`}
+        style={{ width: "100%" }}
       >
         <div
           style={{
+            width: "100%",
             maxWidth: 1280,
             margin: "0 auto",
             padding: "0 32px",
@@ -137,6 +193,7 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            boxSizing: "border-box",
           }}
         >
           {/* Logo */}
@@ -153,8 +210,8 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
           >
             <div
               style={{
-                width: 48,
-                height: 48,
+                width: 96,
+                height: 96,
                 background: "transparent",
                 display: "flex",
                 alignItems: "center",
@@ -216,20 +273,6 @@ function Header({ onNav }: { onNav: (id: string) => void }) {
 
           {/* Desktop CTA */}
           <div style={{ display: "flex", gap: 12, alignItems: "center" }} className="hidden md:flex">
-            <a
-              href={`tel:${PHONE_RAW}`}
-              style={{
-                fontSize: 11,
-                fontWeight: 600,
-                letterSpacing: "0.05em",
-                fontFamily: "'Inter', sans-serif",
-                color: scrolled ? "#3f3f46" : "rgba(255,255,255,0.7)",
-                textDecoration: "none",
-                transition: "color 0.2s",
-              }}
-            >
-              {PHONE_DISPLAY}
-            </a>
             <a
               href={WA_LINK}
               target="_blank"
@@ -471,12 +514,12 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
 
         {/* CTAs */}
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-          <button onClick={() => onNav("contact")} className="btn-primary" style={{ background: "#ffffff", color: "#0a0a0a", borderColor: "#ffffff" }}>
+          <a href="https://maps.app.goo.gl/m1TongMLL4ETGBTi6" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ background: "#ffffff", color: "#0a0a0a", borderColor: "#ffffff", textDecoration: "none" }}>
             <svg viewBox="0 0 20 20" fill="currentColor" style={{ width: 14, height: 14 }}>
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
             </svg>
             Visit Store
-          </button>
+          </a>
           <a href={WA_LINK} target="_blank" rel="noopener noreferrer" className="btn-outline">
             <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: 14, height: 14 }}>
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -497,24 +540,36 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
           }}
         >
           {[
-            { n: "500+", l: "Devices Sold" },
+            { n: "50000+", l: "Devices Sold" },
             { n: "100%", l: "Genuine" },
-            { n: "3+", l: "Years Trusted" },
+            { n: "4+", l: "Years Trusted" },
             { n: "4.9★", l: "Customer Rating" },
-          ].map((s) => (
+          ].map((s, i) => (
             <div key={s.l}>
-              <p
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: 22,
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  letterSpacing: "-0.02em",
-                  marginBottom: 2,
-                }}
-              >
-                {s.n}
-              </p>
+              {s.n === "50000+" ? (
+                <CountUp end={50000} suffix="+" duration={2400} delay={i * 120} />
+              ) : s.n === "100%" ? (
+                <CountUp end={100} suffix="%" duration={2400} delay={i * 120} />
+              ) : s.n === "4+" ? (
+                <CountUp end={4} suffix="+" duration={2400} delay={i * 120} />
+              ) : (
+                <div
+                  style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: 22,
+                    fontWeight: 700,
+                    color: "#ffffff",
+                    letterSpacing: "-0.02em",
+                    marginBottom: 2,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 0,
+                  }}
+                >
+                  <span style={{ minWidth: "1.2em" }}>4</span>
+                  <span>.9★</span>
+                </div>
+              )}
               <p
                 style={{
                   fontSize: 10,
@@ -760,7 +815,7 @@ function CustomersGallery() {
                 fontWeight: 500,
               }}
             >
-              500+ Happy Customers and Growing
+              50000+ Happy Customers and Growing
             </span>
             <span
               style={{
@@ -774,6 +829,122 @@ function CustomersGallery() {
             >
               Koduvally & Beyond
             </span>
+          </div>
+        </RevealUp>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Instagram Reels
+// ─────────────────────────────────────────────────────────────────────────────
+function InstagramReels() {
+  useEffect(() => {
+    // Load Instagram embed script
+    const script = document.createElement("script");
+    script.src = "//www.instagram.com/embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Reprocess Instagram embeds when component mounts
+    if ((window as any).instgrm) {
+      (window as any).instgrm.Embeds.process();
+    }
+  }, []);
+
+  return (
+    <section id="instagram" style={{ background: "#0a0a0a", padding: "96px 0" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
+        <RevealUp>
+          <div style={{ marginBottom: 52, textAlign: "center" }}>
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "#52525b",
+                fontFamily: "'Inter', sans-serif",
+                display: "block",
+                marginBottom: 14,
+              }}
+            >
+              04 — Follow Us
+            </span>
+            <h2
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "clamp(28px, 4vw, 48px)",
+                fontWeight: 800,
+                color: "#ffffff",
+                letterSpacing: "-0.03em",
+                lineHeight: 1.1,
+              }}
+            >
+              Latest from Instagram
+            </h2>
+          </div>
+        </RevealUp>
+
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+            gap: 16,
+            marginTop: 48,
+            marginBottom: 48,
+            height: "100vh",
+          }}
+        >
+          <RevealUp>
+            <blockquote
+              className="instagram-media"
+              data-instgrm-permalink="https://www.instagram.com/mr.fone_/"
+              data-instgrm-version="14"
+              style={{
+                background: "#FFF",
+                border: 0,
+                borderRadius: "12px",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+                margin: 0,
+                padding: 0,
+                width: "100%",
+                height: "100%",
+              }}
+            ></blockquote>
+          </RevealUp>
+        </div>
+
+        <RevealUp>
+          <div style={{ textAlign: "center", marginTop: 52 }}>
+            <a
+              href="https://instagram.com/mrfone_official"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-block",
+                background: "#ffffff",
+                color: "#0a0a0a",
+                padding: "12px 32px",
+                fontSize: 12,
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                fontFamily: "'Inter', sans-serif",
+                textDecoration: "none",
+                borderRadius: 6,
+                transition: "all 0.2s",
+              }}
+              onMouseEnter={(e) => {
+                (e.target as HTMLElement).style.background = "#f0f0f0";
+              }}
+              onMouseLeave={(e) => {
+                (e.target as HTMLElement).style.background = "#ffffff";
+              }}
+            >
+              Follow on Instagram
+            </a>
           </div>
         </RevealUp>
       </div>
@@ -1268,8 +1439,8 @@ function About() {
 
               <div className="about-stats">
                 {[
-                  { n: "500+", l: "Devices Sold" },
-                  { n: "3+", l: "Years Running" },
+                  { n: "50000+", l: "Devices Sold" },
+                  { n: "4+", l: "Years Running" },
                   { n: "100%", l: "Genuine Stock" },
                   { n: "4.9★", l: "Avg. Rating" },
                 ].map((s) => (
@@ -1641,49 +1812,26 @@ function Contact() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div
             style={{
-              width: 26,
-              height: 26,
-              background: "#ffffff",
+              width: 96,
+              height: 96,
+              background: "transparent",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              borderRadius: 9,
+              overflow: "hidden",
             }}
           >
-            <span
+            <img
+              src={LogoImg}
+              alt="MrFone logo"
               style={{
-                fontSize: 10,
-                fontWeight: 800,
-                fontFamily: "'Inter', sans-serif",
-                color: "#0a0a0a",
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                filter: "invert(1) brightness(1.2)",
               }}
-            >
-              MF
-            </span>
-          </div>
-          <div>
-            <span
-              style={{
-                fontSize: 12,
-                fontWeight: 700,
-                fontFamily: "'Inter', sans-serif",
-                color: "#ffffff",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              MrFone
-            </span>
-            <span
-              style={{
-                fontSize: 9,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#52525b",
-                fontFamily: "'Inter', sans-serif",
-                marginLeft: 8,
-              }}
-            >
-              Think Digital
-            </span>
+            />
           </div>
         </div>
         <p
@@ -1794,6 +1942,7 @@ export default function App() {
       <Hero onNav={scrollTo} />
       <StoreGrid />
       <CustomersGallery />
+      <InstagramReels />
       <Testimonials />
       <WhyMrFone />
       <Services />
