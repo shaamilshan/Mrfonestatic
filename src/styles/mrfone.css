@@ -400,20 +400,6 @@
   margin-bottom: 24px;
 }
 
-/* Mobile nav */
-@media (max-width: 768px) {
-  .mobile-nav {
-    position: fixed;
-    inset: 0;
-    background: #0a0a0a;
-    z-index: 200;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-  }
-}
 
 /* ─── Responsive Grids ─────────────────────────────────────── */
 
@@ -533,4 +519,24 @@
   gap: 1px;
   background: #1a1a1a;
   margin-bottom: 36px;
+}
+
+/* Instagram embed grid */
+.instagram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 48px;
+  margin-bottom: 48px;
+  height: clamp(500px, 80vh, 800px);
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .instagram-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
 }
