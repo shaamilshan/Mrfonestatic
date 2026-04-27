@@ -2,6 +2,34 @@ import { useState, useEffect, useRef, ReactNode } from "react";
 import "../styles/fonts.css";
 import "../styles/mrfone.css";
 import LogoImg from "../assets/Logo.png";
+import HeroImg from "../assets/shop-images/counter-wide.jpeg";
+import StoreImg1 from "../assets/shop-images/counter.jpeg";
+import StoreImg2 from "../assets/shop-images/counter2.jpeg";
+import StoreImg3 from "../assets/shop-images/accessories.jpeg";
+import StoreImg4 from "../assets/shop-images/accessories2.jpeg";
+import AboutImg from "../assets/shop-images/cases.jpeg";
+import CustomerImg1 from "../assets/happycustomer/happy-customer1.jpeg";
+import CustomerImg2 from "../assets/happycustomer/happy-customer2.jpeg";
+import CustomerImg3 from "../assets/happycustomer/happy-customer3.jpeg";
+import CustomerImg4 from "../assets/happycustomer/happy-customer4.jpeg";
+import CustomerImg5 from "../assets/happycustomer/happy-customer5.jpeg";
+import CustomerImg6 from "../assets/happycustomer/happy-customer6.jpeg";
+import CustomerImg7 from "../assets/happycustomer/happy-customer7.jpeg";
+import CustomerImg8 from "../assets/happycustomer/happy-customer8.jpeg";
+import CustomerImg9 from "../assets/happycustomer/happy-customer9.jpeg";
+import CustomerImg10 from "../assets/happycustomer/happy-customer10.jpeg";
+import CustomerImg11 from "../assets/happycustomer/happy-customer11.jpeg";
+import CustomerImg12 from "../assets/happycustomer/happy-customer12.jpeg";
+import CustomerImg13 from "../assets/happycustomer/happy-customer13.jpeg";
+import CustomerImg14 from "../assets/happycustomer/happy-customer14.jpeg";
+import {
+  type CarouselApi,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./components/ui/carousel";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Constants
@@ -14,17 +42,26 @@ const WA_LINK = `https://wa.me/919562452000?text=Hi%20MrFone!%20I'd%20like%20to%
 // Images
 // ─────────────────────────────────────────────────────────────────────────────
 const IMG = {
-  hero: "https://images.unsplash.com/photo-1661934289064-37b6fc541a1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1600",
-  store1: "https://images.unsplash.com/photo-1623375505612-7f85294c9e29?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-  store2: "https://images.unsplash.com/photo-1758467700917-3517eb11ec8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-  store3: "https://images.unsplash.com/photo-1695048132783-4b9f77bde5be?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-  store4: "https://images.unsplash.com/photo-1773291933661-ea3a4a611fab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=800",
-  c1: "https://images.unsplash.com/photo-1753161022023-aa1731af1bd4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600",
-  c2: "https://images.unsplash.com/photo-1726690394405-1a65bf4ba50a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600",
-  c3: "https://images.unsplash.com/photo-1713256595315-07d280819a8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600",
-  c4: "https://images.unsplash.com/photo-1571239982287-9a7a17c1b9c1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600",
-  c5: "https://images.unsplash.com/photo-1566728595333-75a1d7cae961?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600",
-  c6: "https://images.unsplash.com/photo-1715635845617-76d6d68c44f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=600",
+  hero: HeroImg,
+  store1: StoreImg1,
+  store2: StoreImg2,
+  store3: StoreImg3,
+  store4: StoreImg4,
+  about: AboutImg,
+  c1: CustomerImg1,
+  c2: CustomerImg2,
+  c3: CustomerImg3,
+  c4: CustomerImg4,
+  c5: CustomerImg5,
+  c6: CustomerImg6,
+  c7: CustomerImg7,
+  c8: CustomerImg8,
+  c9: CustomerImg9,
+  c10: CustomerImg10,
+  c11: CustomerImg11,
+  c12: CustomerImg12,
+  c13: CustomerImg13,
+  c14: CustomerImg14,
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -546,7 +583,7 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
 
         {/* CTAs */}
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }} className="hero-cta">
-          <a href="https://maps.app.goo.gl/m1TongMLL4ETGBTi6" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ background: "#ffffff", color: "#0a0a0a", borderColor: "#ffffff", textDecoration: "none" }}>
+          <a href="https://maps.app.goo.gl/FuXzfH6ZhUbJb3S19" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ background: "#ffffff", color: "#0a0a0a", borderColor: "#ffffff", textDecoration: "none" }}>
             <svg viewBox="0 0 20 20" fill="currentColor" style={{ width: 14, height: 14 }}>
               <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
             </svg>
@@ -758,14 +795,32 @@ function StoreGrid() {
 // Customers Gallery
 // ─────────────────────────────────────────────────────────────────────────────
 function CustomersGallery() {
+  const [carouselApi, setCarouselApi] = useState<CarouselApi | null>(null);
   const customers = [
-    { img: IMG.c1, name: "Arjun M.", city: "Kozhikode" },
-    { img: IMG.c2, name: "Rahul K.", city: "Feroke" },
-    { img: IMG.c3, name: "Sneha N.", city: "Koduvally" },
-    { img: IMG.c4, name: "Arun P.", city: "Tirur" },
-    { img: IMG.c5, name: "Priya & Family", city: "Malappuram" },
-    { img: IMG.c6, name: "Asif R.", city: "Wandoor" },
+    { img: IMG.c1, name: "Happy Customer 1", city: "Koduvally" },
+    { img: IMG.c2, name: "Happy Customer 2", city: "Koduvally" },
+    { img: IMG.c3, name: "Happy Customer 3", city: "Koduvally" },
+    { img: IMG.c4, name: "Happy Customer 4", city: "Koduvally" },
+    { img: IMG.c5, name: "Happy Customer 5", city: "Koduvally" },
+    { img: IMG.c6, name: "Happy Customer 6", city: "Koduvally" },
+    { img: IMG.c7, name: "Happy Customer 7", city: "Koduvally" },
+    { img: IMG.c8, name: "Happy Customer 8", city: "Koduvally" },
+    { img: IMG.c9, name: "Happy Customer 9", city: "Koduvally" },
+    { img: IMG.c10, name: "Happy Customer 10", city: "Koduvally" },
+    { img: IMG.c11, name: "Happy Customer 11", city: "Koduvally" },
+    { img: IMG.c12, name: "Happy Customer 12", city: "Koduvally" },
+    { img: IMG.c13, name: "Happy Customer 13", city: "Koduvally" },
+    { img: IMG.c14, name: "Happy Customer 14", city: "Koduvally" },
   ];
+
+  useEffect(() => {
+    if (!carouselApi) return;
+    const interval = setInterval(() => {
+      carouselApi.scrollNext();
+    }, 3500);
+
+    return () => clearInterval(interval);
+  }, [carouselApi]);
 
   return (
     <section
@@ -809,18 +864,31 @@ function CustomersGallery() {
           </div>
         </RevealUp>
 
-        {/* Grid */}
-        <div className="customers-grid">
-          {customers.map((c, i) => (
-            <RevealImg
-              key={c.name}
-              src={c.img}
-              alt={c.name}
-              imgClassName="aspect-[3/4]"
-              delay={i * 60}
-            />
-          ))}
-        </div>
+        {/* Carousel */}
+        <Carousel
+          setApi={setCarouselApi}
+          opts={{ align: "start", loop: true }}
+          className="relative"
+        >
+          <CarouselContent>
+            {customers.map((c, i) => (
+              <CarouselItem
+                key={c.name}
+                className="basis-1/2 md:basis-1/3 lg:basis-1/4"
+              >
+                <RevealImg
+                  src={c.img}
+                  alt={c.name}
+                  className="bg-black/10"
+                  imgClassName="aspect-[9/16] object-contain"
+                  delay={i * 40}
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:inline-flex" />
+          <CarouselNext className="hidden md:inline-flex" />
+        </Carousel>
 
         {/* Bottom label */}
         <RevealUp delay={100}>
@@ -1395,7 +1463,7 @@ function About() {
         <div className="about-split">
           {/* Left — image */}
           <RevealImg
-            src={IMG.store1}
+            src={IMG.about}
             alt="MrFone Store"
             className="min-h-[400px] md:min-h-[600px]"
           />
@@ -1805,7 +1873,7 @@ function Contact() {
                   Ground Floor, OK Tower · Near Federal Bank · Koduvally
                 </p>
                 <a
-                  href="https://maps.google.com/?q=OK+Tower+Koduvally+Kerala"
+                  href="https://maps.app.goo.gl/FuXzfH6ZhUbJb3S19"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-outline"
