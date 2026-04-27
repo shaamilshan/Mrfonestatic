@@ -549,31 +549,6 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
         }}
         className="hidden md:block"
       >
-        <p
-          style={{
-            fontSize: 10,
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "rgba(255,255,255,0.4)",
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 500,
-            marginBottom: 4,
-          }}
-        >
-          Koduvally, Kerala
-        </p>
-        <p
-          style={{
-            fontSize: 10,
-            letterSpacing: "0.2em",
-            textTransform: "uppercase",
-            color: "rgba(255,255,255,0.4)",
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: 500,
-          }}
-        >
-          Est. 2021
-        </p>
       </div>
 
       {/* Content */}
@@ -587,23 +562,6 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
           width: "100%",
         }}
       >
-        {/* Eyebrow */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }} className="hero-content">
-          <div style={{ width: 32, height: 1, background: "rgba(255,255,255,0.4)" }} />
-          <span
-            style={{
-              fontSize: 10,
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.5)",
-              fontFamily: "'Inter', sans-serif",
-              fontWeight: 600,
-            }}
-          >
-            Ground Floor, OK Tower · Near Federal Bank
-          </span>
-        </div>
-
         {/* Headline */}
         <h1
           style={{
@@ -662,11 +620,12 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
         <div
           style={{
             display: "flex",
-            gap: 40,
+            gap: 24,
             marginTop: 64,
             paddingTop: 32,
             borderTop: "1px solid rgba(255,255,255,0.1)",
-            flexWrap: "wrap",
+            flexWrap: "nowrap",
+            overflowX: "auto",
           }}
           className="hero-stats"
         >
@@ -720,13 +679,13 @@ function Hero({ onNav }: { onNav: (id: string) => void }) {
           position: "absolute",
           bottom: 32,
           right: 32,
-          display: "flex",
+          display: "none",
           flexDirection: "column",
           alignItems: "center",
           gap: 6,
           opacity: 0.4,
         }}
-        className="hidden md:flex"
+        className="md:flex"
       >
         <div style={{ width: 1, height: 48, background: "rgba(255,255,255,0.4)" }} />
         <span
@@ -841,9 +800,10 @@ function StoreGrid() {
                 color: "#a1a1aa",
                 fontFamily: "'Inter', sans-serif",
                 fontWeight: 500,
+                marginLeft: 16,
               }}
             >
-              Open Mon–Sat 9AM–8PM
+              Open Mon–Sat 10AM–8PM
             </span>
           </div>
         </RevealUp>
